@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Short Answer Evaluation 
+{% endblock %} 
+{% block content %}
+<div class="section">
+  <div class="container">
+    <div class="content-section">
+      <div class="title">
+        <h1>About</h1>
+      </div>
+      <div class="content">
+        <h2>Evaluation Of Short Answers</h2>
+        <p>
+          Education is fundamental for human progress. A student is evaluated by
+          the mark he/she scores. The evaluation of student's work is a central
+          aspect of the teaching profession that can affect students in
+          significant ways. 
+          Though teachers use multiple criteria for assessing
+          student work, it is not known if emotions are a factor in their
+          grading decisions. Also, there are several mistakes that occur on the
+          department's side like totaling error, marking mistakes. 
+          <br>Students can use the system to assess the accuracy and 
+          quality of their short text responses to questions. 
+          The Short Answer Evaluation system is designed to address the evaluation needs of both students and teachers, providing distinct benefits from each perspective.
+        </p>
+        <div class="button">
+          <a href="{{ url_for('answers') }}">Get Started!</a>
+        </div>
+      </div>
+    </div>
+    <div class="image-section">
+      <img src="{{ url_for('static', filename='img.jpg')}}" alt="">
+    </div>
+  </div>
+</div>
+{% endblock %}
