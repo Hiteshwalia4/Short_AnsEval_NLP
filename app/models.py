@@ -1,4 +1,4 @@
-from app import db, login_manager
+from app import db,app, login_manager
 from flask_login import UserMixin
 
 @login_manager.user_loader
@@ -13,3 +13,8 @@ class User(db.Model, UserMixin()):
 
     def __repr__(self):
         return f"User {self.username}"
+    
+    
+with app.app_context():
+    db.create_all()
+   
