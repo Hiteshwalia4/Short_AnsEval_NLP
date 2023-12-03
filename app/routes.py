@@ -1,5 +1,5 @@
 from app import app, db, bcrypt
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from app.forms import RegisterForm, LoginForm,AnswerForm
 from app.nlp import evaluate_answer
 from app.models import User
@@ -32,8 +32,8 @@ def register():
 def login_page():
     form = LoginForm()
     if form.validate_on_submit():
-        user=User.query.filter_by(email_address=form.email_address.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password1):
+        user=User.query.filter_by(email_address=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             flash(f"Success!! You are logged in as: {user.username}", category='success')
             return redirect(url_for("answers"))
@@ -41,7 +41,6 @@ def login_page():
             flash("Incorrect User Name or Password!! Please Try Again.", category='danger')
 
     return render_template("login.html", form=form)        
-
 
 
 @app.route("/answers", methods=['GET', 'POST'])
@@ -71,3 +70,10 @@ def logout():
     logout_user()
     flash("You have been logged out!!", category='info')
     return redirect(url_for("home"))
+
+@app.route("/results", methods=['GET', 'POST'])
+def results():
+    result1 = request.args['result1']
+    result2 = request.args['result2']
+    result3 = request.args['result3']
+    return render_template("results.html", result1=result1, result2=result2, result3=result3)    
