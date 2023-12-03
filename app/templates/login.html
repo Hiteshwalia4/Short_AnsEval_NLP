@@ -3,31 +3,36 @@
     Login Page 
 {% endblock %} 
 {% block content %}
-<body class="text-center">
-  <div class="container">
-    <form method="POST" class="form-signin">
-      {{ form.hidden_tag() }}
-      <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
-      <br />
-      {{ form.email.label() }} 
-      {{ form.email(class="form-control", placeholder="Email Address") }} 
-      {{ form.password.label() }} 
-      {{ form.password(class="form-control", placeholder="Password") }}
 
-      <br />
+<div class="header">
+  <div class="login_container">
+            <form method="POST" action="">
+              {{ form.hidden_tag() }}
+              <div class="text-container" style="text-align: center;">
+                <h1>Login</h1>
+              </div>
+              <div class="form-group">
+                {{ form.email(class="form-control-input", placeholder="Email Address") }} 
+              </div>
+              <div class="form-group">
+                {{ form.password(class="form-control-input", placeholder="Password") }}
+              </div>
+        
+              <div class="form-group">
+                {{ form.submit(class="form-control-submit-button" , value="SIGN UP") }}
+              </div>
+              <h6 style="color:white">Don't have an account?</h6>
 
-      <div class="d-grid gap-2">
-        {{ form.submit(class="btn btn-lg btn-primary") }}
-        </div>
-        <div class="checkbox mb-3 my-4">
-            <h6>Do not have an account?</h6>
-            <a
-              class="btn btn-sm btn-secondary"
-              href="{{ url_for('register') }}"
-              >Register</a
-            >
-          </div>
-    </form>
+              <a class="btn-solid-lg" style="padding: 20px;" href="{{ url_for('register') }}">REGISTER</a>
+            </form>
+            <!-- end of registration form -->
+
+          </div> <!-- end of col -->
+        </div> <!-- end of row -->
+      </div> <!-- end of container -->
+    </div> <!-- end of form-1 -->
+    <!-- end of registration -->
   </div>
-</body>
+</div>
+
 {% endblock %}
