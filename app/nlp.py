@@ -34,6 +34,9 @@ def evaluate_answer(user_answer, reference_answer):
     preprocessed_answer = preprocess_text(answer)
     preprocessed_reference_answer = preprocess_text(reference_answer)
 
+    #Finding the missing keywords
+    missing_keywords = set([keyword for keyword in preprocessed_reference_answer.split() if keyword not in preprocessed_answer.split()])
+    
     # Creating a TF-IDF vectorizer
     vectorizer = TfidfVectorizer()
 
@@ -42,8 +45,8 @@ def evaluate_answer(user_answer, reference_answer):
         [preprocessed_answer, preprocessed_reference_answer])
 
     # Calculate the cosine similarity between the answer and the reference answer
-    similarity = cosine_similarity(tfidf_matrix[1:2], tfidf_matrix[2:3])
+    similarity = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])
 
     # Marks calculated
     marks = math.floor((similarity*100)/10)
-    return marks
+    return marks, missing_keywords
