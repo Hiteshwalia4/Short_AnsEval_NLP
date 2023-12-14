@@ -28,7 +28,10 @@ class LoginForm(FlaskForm):
 
 
 class AnswerForm(FlaskForm):
-    answer1 = StringField(label="Answer 1:", validators=[DataRequired()])
-    answer2 = StringField(label="Answer 2:", validators=[DataRequired()])
-    answer3 = StringField(label="Answer 3:", validators=[DataRequired()])
+    python_answer1=StringField(validators=[DataRequired()])
+    python_answer2=StringField(validators=[DataRequired()])
+    python_answer3=StringField(validators=[DataRequired()])
+    java_answer1=StringField(validators=[DataRequired()])
+    java_answer2=StringField(validators=[DataRequired()])
+    java_answer3=StringField(validators=[DataRequired()])
     submit = SubmitField(label="Submit")
