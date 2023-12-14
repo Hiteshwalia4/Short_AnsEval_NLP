@@ -14,6 +14,12 @@ class User(db.Model, UserMixin()):
     def __repr__(self):
         return f"User {self.username}"
     
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(30), nullable=False)
+    ques = db.Column(db.Text, nullable=False)
+    ans = db.Column(db.Text, nullable=False)
+
     
 with app.app_context():
     db.create_all()
