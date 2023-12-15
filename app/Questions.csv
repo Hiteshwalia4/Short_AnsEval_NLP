@@ -1,0 +1,21 @@
+Subject,Ques,Ans
+Python,Python is an interpreted language. Explain.,Python is an interpreted programming language that runs code line by line without earlier compiling the whole program into machine language.
+Python,What are decorators in Python?,A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure.
+Python,What is namespace in Python?,A namespace is a way of providing the unique name for each object in Python.
+Python,"What is the purpose of the if __name__ == ""__main__"": statement in Python scripts?","It ensures that the code block inside it runs only if the script is executed directly, not when imported as a module. Useful for script/module dual-purpose files."
+Python,What is the difference between lists and tuples in Python?,"Lists are mutable, allowing modification, while tuples are immutable. Tuples use parentheses, and lists use square brackets for declaration and indexing"
+Python,Differentiate between shallow and deep copy in Python.,"A shallow copy creates a new object but doesn't clone nested objects. A deep copy creates a completely independent copy of the original object, including all nested objects"
+Python,How does Python manage memory?,Python uses a private heap space to manage memory. The built-in garbage collector deallocates memory occupied by objects that are no longer referenced by the program.
+Python,Explain the purpose of the __init__ method in Python classes.,__init__ is a special method used for initializing object attributes when an instance of the class is created. It is called automatically
+Python,What is the purpose of the lambda function in Python?,"lambda functions are anonymous functions created using the lambda keyword. They are often used for short, one-line operations where a full function is not necessary."
+Python,What is the purpose of the enumerate() function in Python?,"enumerate() is used to iterate over elements in a sequence, providing both the index and the corresponding element in each iteration. It returns tuples (index, element)."
+Java,Explain the role of the finally block in exception handling.,"The finally block contains code that always executes, regardless of whether an exception occurs or not. It is used for cleanup operations."
+Java,What is the Java Virtual Machine (JVM)?,JVM is a virtual machine that enables Java programs to run on any device or operating system. It translates Java bytecode into machine code for execution.
+Java,What is the purpose of the super keyword in Java?,"The super keyword is used to invoke the superclass methods, variables, or constructor. It is often used to differentiate between superclass and subclass members."
+Java,How does Java support multithreading?,Java supports multithreading through the Thread class or by implementing the Runnable interface. The synchronized keyword ensures thread safety in shared resources.
+Java,What is the significance of the static keyword in Java?, static is used to declare members (variables and methods) that belong to a class rather than instances. It allows access without creating an object.
+Java,What is the difference between interface and abstract class in Java?,"An interface only declares abstract methods and constants, while an abstract class can have abstract and non-abstract methods. A class can implement multiple interfaces but extend only one abstract class."
+Java,What is the difference between throw and throws in Java?,"throw is used to explicitly throw an exception, while throws is used in method signatures to declare the exceptions that the method might throw."
+Java,What is the try-with-resources statement in Java?,try-with-resources is a feature that automatically closes resources like files or sockets when they are no longer needed. It simplifies resource management.
+Java,What is the purpose of the this keyword in Java?,The this keyword refers to the current instance of the class. It is used to differentiate between instance variables and parameters with the same name.
+Java,Explain the concept of method overriding in Java.,Method overriding allows a subclass to provide a specific implementation for a method already defined in its superclass. It is achieved using the same method signature.
