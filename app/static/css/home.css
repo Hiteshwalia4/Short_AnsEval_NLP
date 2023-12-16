@@ -1,23 +1,44 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap");
-
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+.login_container{
+  width: 65%;
+  display: block;
+  margin: auto;
+  padding: 35px;
+  margin-top:-50px;
+  background-color: #0b0433;
+}
+h1,h2,h3,h4,h5,h6{
+  color: #ffffff;
+}
+h1{
+  color: #ffffff;
+  font-weight: 700;
+  font-size:42px;
+}
+h5{
+  color: #ffffff;
+  font-weight: 400;
+  font-size:20px;
 
+}
 .section {
   width: 100%;
   min-height: 100vh;
-  background-color: #ddd;
+  padding-top: 50px;
+  background-color: #0b0433;
 }
 
-.container {
+.about_container {
   width: 80%;
   display: block;
   margin: auto;
-  padding-top: 100px;
+  padding-top: 70px;
+
 }
 
 .content-section {
@@ -44,13 +65,15 @@
 
 .content-section .content h2 {
   margin-top: 20px;
-  color: #5d5d5d;
+  color: turquoise;
   font-size: 21px;
+  font-weight: 600;
 }
 
 .content-section .content p {
   margin: 10px;
-  font-family: sans-serif;
+  font-style: Open Sans;
+
   font-size: 18px;
   line-height: 1.5;
 }
@@ -60,17 +83,19 @@
 }
 
 .content-section .content .button a {
-  background-color: blue;
+  background-color: turquoise;
+  border: 1px solid turquoise;
+  border-radius: 32px;
   padding: 10px 20px;
   text-decoration: none;
-  color: #fff;
-  font-size: 15px;
-  letter-spacing: 1.5px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #ffffff;
 }
 
 .content-section .content .button a:hover {
-  background-color: #a52a2a;
-  color: #fff;
+  background-color: transparent;
+  color: turquoise;
 }
 
 @media screen and (max-width: 768px) {
@@ -105,3 +130,6 @@
     padding: 9px 30px;
   }
 }
+
+
+/* #0b0433 bg dark blue */
