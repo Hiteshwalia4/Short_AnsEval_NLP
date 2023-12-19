@@ -1,9 +1,10 @@
 from app import app, db, bcrypt
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, session
 from app.forms import RegisterForm, LoginForm,AnswerForm
 from app.nlp import evaluate_answer
 from app.models import User
 from flask_login import login_user, login_required, logout_user
+from app.utils import get_random_question
 
 @app.route("/")
 @app.route("/home")
@@ -21,7 +22,7 @@ def register():
         db.session.commit()
 
         login_user(user_to_create)
-        flash( f"Account created succesfully. You are now logged in as { user_to_create.username }", category="sucess")
+        flash( f"Account created succesfully. You are now logged in as { user_to_create.username }", category="success")
 
         return redirect(url_for("answers"))
     
@@ -43,26 +44,51 @@ def login_page():
     return render_template("login.html", form=form)        
 
 
+# @app.route("/noofques", methods=['GET','POST'])
+# def noofques():
+#     form= AskNoOfQues()
+#     py_count=form.python_count.data
+#     jv_count=form.java_count.data
+#     return redirect(url_for("answers"))
+
 @app.route("/answers", methods=['GET', 'POST'])
 @login_required
 def answers():
     form = AnswerForm()
+    # form2=AskNoOfQues()
     if form.validate_on_submit():
-        reference_answer1 = "Python is an interpreted programming language that runs code line by line without earlier compiling the whole program into machine language."
-        user_answer1 = form.answer1.data
-        result1 = evaluate_answer(user_answer1, reference_answer1)
+        # Form has been submitted with answers, retrieve questions from the session
+        random_questions = session.get('random_questions')
+        if not random_questions or 'Python' not in random_questions or 'Java' not in random_questions:
+            # Session data is missing, redirect to avoid errors
+            return redirect(url_for('answers'))
 
-        reference_answer2 = "A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure."
-        user_answer2 = form.answer2.data
-        result2 = evaluate_answer( user_answer2, reference_answer2)
+        python_questions = random_questions['Python']
+        java_questions = random_questions['Java']
 
-        reference_answer3 = "A namespace is a way of providing the unique name for each object in Python."
-        user_answer3 = form.answer3.data
-        result3 = evaluate_answer(user_answer3, reference_answer3)
+        python_reference_answers = [question['answer'] for question in python_questions]
+        java_reference_answers = [question['answer'] for question in java_questions]
+        
+        # Separate user answers for Python and Java
+        python_user_answers = [form[f'python_answer{i}'].data for i in range(1, len(python_questions)+1)]
+        java_user_answers = [form[f'java_answer{i}'].data for i in range(1, len(java_questions)+1)]
 
-        return redirect(url_for("results", result1=result1, result2=result2, result3=result3))
+        # Evaluate answers
+        python_results = [evaluate_answer(user_ans, ref_ans) for user_ans, ref_ans in zip(python_user_answers, python_reference_answers)]
+        java_results = [evaluate_answer(user_ans, ref_ans) for user_ans, ref_ans in zip(java_user_answers, java_reference_answers)]
 
-    return render_template('answers.html', form=form)
+        return redirect(url_for("results", 
+                                python_results=python_results, java_results=java_results))
+
+    # Form is being loaded for the first time, get random questions and store in session
+    python_questions = get_random_question('Python')
+    java_questions = get_random_question('Java')
+    session['random_questions'] = {
+            'Python': python_questions,
+            'Java': java_questions
+    }
+    
+    return render_template('answers.html', form=form, python_questions=session['random_questions']['Python'], java_questions=session['random_questions']['Java'])
 
 
 @app.route("/logout")
@@ -71,9 +97,14 @@ def logout():
     flash("You have been logged out!!", category='info')
     return redirect(url_for("home"))
 
+
 @app.route("/results", methods=['GET', 'POST'])
 def results():
-    result1 = request.args['result1']
-    result2 = request.args['result2']
-    result3 = request.args['result3']
-    return render_template("results.html", result1=result1, result2=result2, result3=result3)    
+    python_results = request.args.getlist('python_results')
+    java_results = request.args.getlist('java_results')
+    python_questions=session['random_questions']['Python']
+    java_questions=session['random_questions']['Java']
+    return render_template("results.html", python_questions=python_questions, java_questions=java_questions,
+                           python_results=python_results, java_results=java_results)
+
+      
