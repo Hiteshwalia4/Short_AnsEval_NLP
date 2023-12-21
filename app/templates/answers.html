@@ -1,30 +1,44 @@
-{% extends 'base.html' %} 
-{% block title %} 
-Answers Page 
-{% endblock %} 
+{% extends 'base.html' %}
+{% block title %}
+Answers Page
+{% endblock %}
 {% block content %}
+
 <body>
-  <div class="container">
-    <form method="POST" class="form-answers">
-      {{ form.hidden_tag() }}
-      <h1 class="h3 mb-3 font-weight-normal">Questions</h1>
-      <br />
-      <h5>Question1. Python is an interpreted language. Explain.</h5>
-      {{ form.answer1.label() }} 
-      {{ form.answer1(class="form-control",placeholder="Answer") }} 
-      <h5>Question2. What are decorators in Python?</h5>
-      {{ form.answer2.label() }} 
-      {{ form.answer2(class="form-control", placeholder="Answer") }}
-      <h5>Question3. What is namespace in Python?</h5>
-      {{ form.answer3.label() }} 
-      {{ form.answer3(class="form-control", placeholder="Answer") }}
-
-      <br />
-
-      <div class="d-grid gap-2">
-        {{ form.submit(class="btn btn-lg btn-primary") }}
-      </div>
-    </form>
+  <div class="header">
+    <div class="container">
+      <form method="POST" class="form-answers" id="pyq" >
+        {{ form.hidden_tag() }}
+        <h1>Python Questions</h1>
+      {% for i in range(1, 4) %}
+          <div class="form-group">
+              <h5> Question{{i}}: {{ python_questions[i-1].question }}</h5>     
+              {{ form['python_answer' + i|string](class="form-control-input", placeholder="Answer") }}                
+            </div>
+      {% endfor %}
+    </div>
   </div>
+  
+  <div style="background: url('static/images/jv_q.jpg'); height: 600px; width: 100%;">
+    <div class="container" >
+      {{ form.hidden_tag() }}
+      
+      <h1>Java Questions</h1>
+      
+      {% for i in range(1, 4) %}
+      <div class="form-group">
+        <h5> Question{{i}}:{{ java_questions[i-1].question }}</h5>
+        {{ form['java_answer' + i|string](class="form-control-input", placeholder="Answer") }} 
+      </div>
+      {% endfor %}
+      
+      <br><br>
+  
+      <div class="form-group" >
+        {{ form.submit(class="form-control-submit-button" , value="SUBMIT") }}
+      </div>
+    </div>
+  </div>
+</form>
 </body>
 {% endblock %}
