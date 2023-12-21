@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Results Page 
+{% endblock %} 
+{% block content %}
+<body>
+  <div class="header">
+    <div class="container" style="background-color: #0b0433; padding: 50px; margin-top: -40px;">
+      <br>
+      <center><h2>Wohoo, Here are the Results</h2></center><br>
+      <h3 style="color: turquoise;"> Python Section</h3><br>
+      {% for i in range(3) %}
+        <h5>Question{{ i + 1 }}: {{ python_questions[i]['question'] }}</h5>
+        <h6>Marks: {{ python_results[i][1:3] }}</h6>
+        <h6 style="color: turquoise;">You could include these Keywords to improve your accuracy: </h6>
+        <h6 style="color: orange">{{ python_results[i][5:-2] }}</h6>
+        <br>
+      {% endfor %}
+
+      <h3 style="color: turquoise;"> Java Section</h3><br>
+      {% for i in range(3) %}
+        <h5>Question{{ i + 1 }}: {{ java_questions[i]['question'] }}</h5>
+        <h6>Marks: {{ java_results[i][1:3] }}</h6>
+        <h6 style="color: turquoise;">You could include these Keywords to improve your accuracy: </h6>
+        <h6 style="color: orange;">{{ java_results[i][5:-2] }}</h6>
+        <br>
+      {% endfor %}
+    </div>
+  </div>
+
+</body>
+{% endblock %}
